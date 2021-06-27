@@ -1,22 +1,21 @@
 #include <Servo.h>
 
-int lightPin = A0;   // Analog pin for CdS Photoresistor (light sensor)
-int motionPin = 7;  // Pin for input from PIR Sensor (motion sensor)
-int nightLight = 13;    // Pin for output to light bulb
-
 // status of light
-bool LIGHT_ON = false;
-bool LIGHT_OFF = true;
+bool isLightOn = false;
+bool isLightOff = true;
 
-const int INITIAL_POS = 0;
-const int TURN_ON_POS = ;
-const int TURN_OFF_POS = 30;
+// constants
+const int lightPin = A0;   // Analog pin for CdS Photoresistor (light sensor)
+const int motionPin = 7;  // Pin for input from PIR Sensor (motion sensor)
+const int nightLight = 13;    // Pin for output to light bulb
+const int servoPin = 8; // Pin for the servo device
 
-const int servoPin = 8;
+const int initialPosition = 90; // initial position for the servo
+const int turnOnPosition = 85; // position of the servo to turn on the light
+const int turnOffPosition = 95; // position of the servo to turn off the light
 
-int pos = 0;
-
-Servo SERVO_MOTOR;
+// Servo instance
+Servo servoMotorInstance;
 
 void setup() {
   Serial.begin(9600);
@@ -29,9 +28,9 @@ void setup() {
   digitalWrite(nightLight, LOW); 
 	
   // configure the Servo motor
-  SERVO_MOTOR.attach(servoPin, 500, 2500);
+  servoMotorInstance.attach(servoPin);
   // set the servo to be at 180 degrees
-  SERVO_MOTOR.write(INITIAL_POS);
+  servoMotorInstance.write(initialPosition);
 }
    
 void loop() {
@@ -42,36 +41,36 @@ void loop() {
   	if (motionReading) {
       if (lightPin < 200) { 
         digitalWrite(nightLight,HIGH);
-        turn_on_the_light();
+        turnOnLight();
       }
     }else {
     	digitalWrite(nightLight,LOW);
-      	turn_off_the_light();
+      	turnOffLight();
     }
   	// delay for 200 miliseconds
 	delay(200);
  }
 
 // functions to turn on and off the lights
-void turn_on_the_light(){
-  if (!LIGHT_ON) {
-    LIGHT_ON = true;
-    LIGHT_OFF = false;
-    SERVO_MOTOR.write(TURN_ON_POS);
+void turnOnLight(){
+  if (!isLightOn) {
+    isLightOn = true;
+    isLightOff = false;
+    
+    servoMotorInstance.write(turnOnPosition);
     delay(500);
-    SERVO_MOTOR.write(INITIAL_POS);
+    servoMotorInstance.write(initialPosition);
 	Serial.println("LIGHT TURNED ON!");
   }
 }
-void turn_off_the_light(){
-  if (!LIGHT_OFF){
-    LIGHT_OFF = true;
-    LIGHT_ON = false;
-    SERVO_MOTOR.write(TURN_OFF_POS);
+void turnOffLight(){
+  if (!isLightOff){
+    isLightOff = true;
+    isLightOn = false;
+    
+    servoMotorInstance.write(turnOffPosition);
     delay(500);
-    SERVO_MOTOR.write(INITIAL_POS);
+    servoMotorInstance.write(initialPosition);
   	Serial.println("LIGHT TURNED OFF!");
   }
 }
-
-
