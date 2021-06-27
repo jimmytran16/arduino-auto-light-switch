@@ -7,8 +7,8 @@ const int nightLight = 13; // Pin for output to light bulb
 const int servoPin = 8; // Pin for the servo device
 
 const int initialPosition = 90; // initial position for the servo
-const int turnOnPosition = 85; // position of the servo to turn on the light
-const int turnOffPosition = 95; // position of the servo to turn off the light
+const int turnOnPosition = 70; // position of the servo to turn on the light
+const int turnOffPosition = 110; // position of the servo to turn off the light
 
 // status of light
 bool isLightOn = false;
@@ -66,8 +66,6 @@ void rePositionServoMotor(int position, bool lightOn, bool lightOff) {
   servoMotorInstance.write(position);
   isLightOn = lightOn;
   isLightOff = lightOff;
-  delay(500);
-  servoMotorInstance.write(initialPosition);
 
   String message = (lightOn) ? "LIGHT TURNED ON!" : "LIGHT TURNED OFF!";
   Serial.println(message);
