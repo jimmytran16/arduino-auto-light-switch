@@ -7,7 +7,7 @@ const int nightLight = 13; // Pin for output to light bulb
 const int servoPin = 8; // Pin for the servo device
 
 const int initialPosition = 90; // initial position for the servo
-const int turnOnPosition = 70; // position of the servo to turn on the light
+const int turnOnPosition = 60; // position of the servo to turn on the light
 const int turnOffPosition = 110; // position of the servo to turn off the light
 
 // status of light
