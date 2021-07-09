@@ -1,9 +1,8 @@
 #include <Servo.h>
 
 // constants
-const int lightPin = A0; // Analog pin for CdS Photoresistor (light sensor)
+//const int lightPin = A0; // Analog pin for CdS Photoresistor (light sensor)
 const int motionPin = 7; // Pin for input from PIR Sensor (motion sensor)
-const int nightLight = 13; // Pin for output to light bulb
 const int servoPin = 8; // Pin for the servo device
 
 const int initialPosition = 90; // initial position for the servo
@@ -19,16 +18,13 @@ Servo servoMotorInstance;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(nightLight, OUTPUT);
-  pinMode(lightPin, INPUT);
+
   pinMode(motionPin, INPUT);
-  
-  //make sure the light is off
-  digitalWrite(nightLight, LOW);
   // configure the Servo motor
   servoMotorInstance.attach(servoPin);
   // set the servo to be at 180 degrees
   servoMotorInstance.write(initialPosition);
+  Serial.println("STARTED....");
 }
 
 void loop() {
@@ -36,14 +32,12 @@ void loop() {
   int motionReading = digitalRead(motionPin);
 
   // condition to check if any motion was detected
-  if (motionReading) {
-    if (lightPin < 200) {
-      digitalWrite(nightLight, HIGH);
+  if (motionReading == 1) {
       turnOnLight();
-    }
+      delay(100);
   } else {
-    digitalWrite(nightLight, LOW);
-    turnOffLight();
+     turnOffLight();
+     delay(100);
   }
   // delay for 200 miliseconds
   delay(200);
