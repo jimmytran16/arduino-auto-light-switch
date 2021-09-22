@@ -20,7 +20,7 @@ Servo servoMotorInstance;
 void setup() {
   Serial.begin(9600);
   pinMode(nightLight, OUTPUT);
-//  pinMode(lightPin, INPUT);
+  //  pinMode(lightPin, INPUT);
   pinMode(motionPin, INPUT);
   
   //make sure the light is off

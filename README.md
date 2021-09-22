@@ -3,3 +3,6 @@ Overview
 
 Model
 > ![title](./assets/model.png)
+
+Video
+> ![title](./assets/vid.MOV)
