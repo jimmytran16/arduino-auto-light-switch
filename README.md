@@ -5,5 +5,4 @@ Model
 > ![title](./assets/model.png)
 
 Video
-> ![title](./assets/vid.MOV)
-> <video src='./assets/vid.MOV' width=180 height=200/>
+> ![title](./assets/vid.mov)
