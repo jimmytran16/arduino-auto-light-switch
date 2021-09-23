@@ -5,4 +5,4 @@ Model
 > ![title](./assets/model.png)
 
 Video
-> ![title](./assets/vid.mov)
+> ![title](./assets/vid.gif)
