@@ -6,3 +6,4 @@ Model
 
 Video
 > ![title](./assets/vid.MOV)
+> <video src='./assets/vid.MOV' width=180 height=200/>
